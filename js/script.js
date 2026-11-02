@@ -1,6 +1,7 @@
 // Configuração do Supabase: use apenas a chave publishable/anon (nunca a service_role).
-const SUPABASE_URL = '[SUPABASE_URL]';
-const SUPABASE_ANON_KEY = '[SUPABASE_ANON_KEY]';
+// Projeto rme-workspace, tabela public.leads (anon só insere, não lê).
+const SUPABASE_URL = 'https://sdrcoyvweebvhygcedue.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_VMQ6OHuQuQBoK8MZq7fANA_xpUwmoFx';
 const LEAD_SOURCE = 'maxwell-modo-stifler-ebook';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -309,14 +310,14 @@ document.addEventListener('DOMContentLoaded', () => {
         signal: controller.signal,
         keepalive: true,
         headers: {
+          // Chave publishable (sb_publishable_...) vai só no apikey; não é JWT, então sem Authorization.
           apikey: SUPABASE_ANON_KEY,
-          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
           'Content-Type': 'application/json',
           Prefer: 'return=minimal',
         },
         body: JSON.stringify(payload),
       });
-      // 409 = lead já cadastrado (e-mail único): libera o download mesmo assim.
+      // 409 = e-mail já cadastrado nesta página (índice único source + e-mail): libera o download mesmo assim.
       if (!response.ok && response.status !== 409) throw new Error(`HTTP ${response.status}`);
 
       form.reset();
