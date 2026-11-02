@@ -27,13 +27,16 @@
   box-sizing: border-box;
 }
 
+/* Fundo escuro no html/body: é a cor que o Safari do iPhone usa nas barras
+   do navegador e na área de "puxar" a página. O miolo claro fica no <main>. */
 html {
+  background: var(--dark);
   scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
-  background: var(--bg);
+  background: var(--dark);
   color: var(--ink);
   font-family: "Inter", system-ui, sans-serif;
   font-size: 1rem;
@@ -43,6 +46,11 @@ body {
 
 body.modal-open {
   overflow: hidden;
+}
+
+main {
+  display: block;
+  background: var(--bg);
 }
 
 img {
