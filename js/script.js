@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Mantém o Tab dentro do modal (fallback para navegadores sem suporte a inert).
   dialog.addEventListener('keydown', (event) => {
     if (event.key !== 'Tab') return;
-    const focusable = Array.from(dialog.querySelectorAll('button, a[href], input, [tabindex="0"]'))
+    const focusable = Array.from(dialog.querySelectorAll('button, a[href], input, textarea, [tabindex="0"]'))
       .filter((el) => !el.disabled && el.offsetParent !== null);
     if (!focusable.length) return;
     const first = focusable[0];
@@ -147,7 +147,12 @@ document.addEventListener('DOMContentLoaded', () => {
     selectOptions[activeIndex].scrollIntoView({ block: 'nearest' });
   };
 
+  // Campo livre que só aparece quando a pessoa escolhe "Outra".
+  const otherField = form.querySelector('.lead-form__other');
+  const otherInput = form.elements.pain_other;
+
   const renderSelect = () => {
+    otherField.hidden = painSelect.value !== 'Outra';
     selectValue.textContent = painSelect.value || placeholder;
     selectValue.classList.toggle('is-placeholder', !painSelect.value);
     selectOptions.forEach((item) => {
@@ -174,7 +179,11 @@ document.addEventListener('DOMContentLoaded', () => {
     painSelect.value = selectOptions[index].dataset.value;
     painSelect.setAttribute('aria-invalid', 'false');
     renderSelect();
-    closeSelect();
+    if (otherField.hidden) closeSelect();
+    else {
+      closeSelect(false);
+      otherInput.focus();
+    }
   };
 
   selectButton.addEventListener('click', () => {
@@ -255,6 +264,13 @@ document.addEventListener('DOMContentLoaded', () => {
     errorBox.hidden = true;
   });
 
+  // "Outra" + texto livre vira "Outra: texto" na mesma coluna do Supabase.
+  const painDescription = (data) => {
+    const pain = String(data.get('pain_description')).trim();
+    const other = String(data.get('pain_other') || '').trim();
+    return pain === 'Outra' && other ? `Outra: ${other}` : pain;
+  };
+
   // 4. Envio do formulário.
   let sending = false;
   form.addEventListener('submit', async (event) => {
@@ -268,7 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
       name: String(data.get('name')).trim(),
       email: String(data.get('email')).trim().toLowerCase(),
       phone: String(data.get('phone')).trim(),
-      pain_description: String(data.get('pain_description')).trim(),
+      pain_description: painDescription(data),
       source: LEAD_SOURCE,
       page_url: window.location.href,
       user_agent: navigator.userAgent,
