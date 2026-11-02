@@ -1,0 +1,425 @@
+:root {
+  /* Paleta da marca */
+  --brand: #c82327;       /* vermelho principal: fundo e identidade */
+  --red: #e72e1b;         /* vermelho vibrante: destaques, bordas e botões */
+  --red-deep: #9e171b;    /* vermelho escuro: sombras e profundidade */
+  --coral: #f1786c;       /* coral: detalhes e degradês */
+  --white: #ffffff;       /* branco: textos, cards e contrastes */
+  --black: #21171f;       /* preto profundo: títulos e textos de impacto */
+
+  /* Aplicação */
+  --bg: #f7f2f1;          /* fundo geral claro (branco levemente aquecido) */
+  --card: var(--white);
+  --ink: var(--black);
+  --dark: var(--black);   /* fundo hero/footer */
+  --red-dark: var(--brand);  /* destaque em fundo claro */
+  --red-light: var(--coral); /* destaque em fundo escuro */
+  --red-soft: rgba(231, 46, 27, 0.12);
+  --red-gradient: linear-gradient(135deg, var(--red) 0%, var(--red-deep) 100%);
+  --muted: #6e6168;
+  --line: #ecdedb;
+  --shadow: 0 18px 45px rgba(33, 23, 31, 0.18);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: clamp(1.95rem, 8vw, 3.4rem);
+  font-weight: 900;
+}
+
+h2 span {
+  color: var(--red-dark);
+}
+
+p {
+  margin: 0;
+}
+
+.container {
+  width: min(100% - 44px, 1060px);
+  margin-inline: auto;
+}
+
+/* Eyebrow */
+.eyebrow {
+  margin-bottom: 14px;
+  color: var(--red);
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+}
+
+/* Botão principal */
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 58px;
+  padding: 16px 28px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--red-gradient);
+  box-shadow: 0 14px 30px rgba(231, 46, 27, 0.35);
+  color: #fff;
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 36px rgba(231, 46, 27, 0.45);
+  filter: brightness(1.05);
+}
+
+.cta:focus-visible {
+  outline: 3px solid var(--red-light);
+  outline-offset: 3px;
+}
+
+.cta:disabled {
+  cursor: wait;
+  opacity: 0.7;
+  transform: none;
+}
+
+.reassurance {
+  margin-top: 14px;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.82rem;
+  text-align: center;
+}
+
+.reassurance span {
+  color: var(--red-light);
+}
+
+/* Ícones */
+.icon {
+  display: inline-grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(231, 46, 27, 0.45);
+  border-radius: 8px;
+  background: linear-gradient(145deg, #2e2029 0%, var(--black) 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 8px 18px rgba(33, 23, 31, 0.25);
+  color: var(--red);
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 900;
+}
+
+.icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Marca */
+.brand {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  color: var(--white);
+  font-family: "Montserrat", sans-serif;
+  font-size: clamp(1.2rem, 4.6vw, 1.45rem);
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  text-decoration: none;
+  text-shadow: 0 2px 14px rgba(33, 23, 31, 0.55);
+}
+
+.brand__name {
+  white-space: nowrap;
+}
+
+.brand small {
+  padding: 4px 10px 4px 11px;
+  border-radius: 999px;
+  background: var(--red-gradient);
+  box-shadow: 0 6px 16px rgba(33, 23, 31, 0.35);
+  color: var(--white);
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.3em;
+  text-shadow: none;
+}
+
+/* Hero: imagem de fundo que se dissolve no fundo escuro */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 22px 0 64px;
+  background: var(--dark);
+  color: #fff;
+}
+
+.hero__bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  aspect-ratio: 4 / 5;
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 72%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 72%, transparent 100%);
+}
+
+.hero__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* Sombra leve no topo para a marca ficar legível sobre a foto */
+.hero__bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(33, 23, 31, 0.55) 0%, rgba(33, 23, 31, 0) 18%);
+}
+
+.nav {
+  position: relative;
+  z-index: 1;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  /* Empurra o texto para a parte em que a imagem já está sumindo */
+  padding-top: calc(min(100vw, 1080px) * 1.25 * 0.9 - 60px);
+}
+
+.hero h1 {
+  font-size: clamp(2.15rem, 9.6vw, 4.6rem);
+  font-weight: 900;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+}
+
+/* Carimbo "Ative o Modo Stifler." batendo por cima do fim do título */
+.hero__stamp {
+  position: relative;
+  width: min(94%, 380px);
+  height: auto;
+  margin-top: -0.5em;
+  margin-left: -4px;
+  transform: rotate(-6deg);
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.6));
+  animation: stamp-in 0.55s cubic-bezier(0.2, 0.9, 0.3, 1.2) 0.35s both;
+}
+
+@keyframes stamp-in {
+  0% {
+    opacity: 0;
+    transform: scale(2.2) rotate(-14deg);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale(0.94) rotate(-5deg);
+  }
+
+  100% {
+    transform: rotate(-6deg);
+  }
+}
+
+.hero__text {
+  margin-top: 18px;
+  max-width: 540px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 1.05rem;
+}
+
+.hero__text strong {
+  color: #fff;
+}
+
+.hero__actions {
+  margin-top: 30px;
+}
+
+/* Para quem é */
+.for-you-section {
+  padding: 30px 0;
+}
+
+.for-you-section h2 {
+  max-width: 860px;
+}
+
+.for-you-section h2 span {
+  display: block;
+}
+
+.for-you-grid {
+  display: grid;
+  gap: 16px;
+  margin-top: 38px;
+}
+
+.for-you-card {
+  padding: 24px;
+  border: 1px solid rgba(231, 46, 27, 0.18);
+  border-radius: 18px;
+  background: var(--card);
+  box-shadow: 0 6px 18px rgba(33, 23, 31, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.for-you-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+
+.for-you-card h3 {
+  margin-top: 16px;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.for-you-card p {
+  margin-top: 8px;
+  color: var(--muted);
+}
+
+/* Reveal on scroll */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (min-width: 640px) {
+  .for-you-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .for-you-card:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero {
+    display: flex;
+    flex-direction: column;
+    min-height: min(100vh, 860px);
+    padding: 34px 0 96px;
+  }
+
+  /* Desktop: imagem à direita, dissolvendo para a esquerda e para baixo */
+  .hero__bg {
+    right: 0;
+    bottom: 0;
+    left: auto;
+    width: min(58%, 820px);
+    aspect-ratio: auto;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 38%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 38%);
+  }
+
+  .hero__bg img {
+    -webkit-mask-image: linear-gradient(180deg, #000 65%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 65%, transparent 100%);
+  }
+
+  .hero__content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 60px;
+  }
+
+  .hero h1,
+  .hero__text {
+    max-width: 560px;
+  }
+
+  .hero__stamp {
+    width: 480px;
+    margin-top: -0.32em;
+  }
+
+  .cta {
+    width: auto;
+    min-width: 350px;
+  }
+
+  .reassurance {
+    text-align: left;
+  }
+
+  .for-you-section {
+    padding: 110px 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal-on-scroll {
+    opacity: 1;
+    transform: none;
+  }
+}

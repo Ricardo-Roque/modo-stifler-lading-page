@@ -1,0 +1,115 @@
+/* CTA final */
+.final-cta-section {
+  padding: 40px 0;
+  background:
+    radial-gradient(circle at 50% 0%, var(--red) 0%, transparent 65%),
+    linear-gradient(180deg, var(--brand) 0%, var(--red-deep) 100%);
+  color: #fff;
+  text-align: center;
+}
+
+.final-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.badge {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 7px 16px;
+  border: 1px solid rgba(241, 120, 108, 0.5);
+  border-radius: 999px;
+  color: var(--red-light);
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+}
+
+.final-cta h2 {
+  max-width: 640px;
+  font-size: clamp(1.4rem, 6.2vw, 2.7rem);
+}
+
+.final-cta h2 span {
+  display: block;
+  color: var(--red-light);
+}
+
+.final-cta__text {
+  max-width: 520px;
+  margin: 18px 0 32px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 1.05rem;
+}
+
+.final-cta .reassurance {
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+}
+
+.final-cta .reassurance span,
+.final-cta h2 span {
+  color: var(--white);
+}
+
+.final-cta h2 span {
+  text-decoration: underline;
+  text-decoration-color: var(--coral);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.12em;
+}
+
+.final-cta .badge {
+  border-color: rgba(255, 255, 255, 0.6);
+  color: var(--white);
+}
+
+.final-cta__text {
+  color: rgba(255, 255, 255, 0.86);
+}
+
+/* Botão branco sobre o fundo vermelho */
+.final-cta .cta {
+  background: var(--white);
+  box-shadow: 0 14px 30px rgba(33, 23, 31, 0.35);
+  color: var(--brand);
+}
+
+/* Footer */
+.site-footer {
+  padding: 46px 0 34px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background: var(--dark);
+  color: #fff;
+  text-align: center;
+}
+
+.site-footer__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.site-footer .brand {
+  align-items: center;
+}
+
+.site-footer__line {
+  width: min(100%, 320px);
+  height: 2px;
+  margin: 26px 0 18px;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+}
+
+.site-footer__copy {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.78rem;
+}
+
+@media (min-width: 768px) {
+  .final-cta-section {
+    padding: 120px 0;
+  }
+}

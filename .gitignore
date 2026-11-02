@@ -1,0 +1,10 @@
+# Fotos brutas e originais (a página usa só as versões .webp em assets/images)
+assets/*
+!assets/images/
+!assets/ebook/
+assets/images/*.png
+assets/images/modo-stifler-carimbo
+
+# Arquivos de trabalho
+Modo Stifler.pdf
+GUIA-LANDING-PAGE.md

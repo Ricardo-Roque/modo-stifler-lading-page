@@ -1,0 +1,87 @@
+/* Galeria "Vida real" — rolagem contínua (ver js/script.js) */
+.lifestyle-section {
+  padding: 30px 0;
+  background: var(--dark);
+  color: #fff;
+}
+
+.lifestyle-section h2 span {
+  display: block;
+  color: var(--red);
+  /* Mesmo brilho do destaque do hero */
+  text-shadow:
+    0 0 18px rgba(231, 46, 27, 0.55),
+    0 0 42px rgba(231, 46, 27, 0.35);
+}
+
+.lifestyle-section__lead {
+  max-width: 560px;
+  margin-top: 16px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.lifestyle-track {
+  --photo-width: 140px;
+  --photo-gap: 10px;
+  --duration: 55s;
+  margin-top: 32px;
+  overflow: hidden;
+  /* Bordas esmaecidas: as fotos entram e saem da tela suavemente */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+}
+
+/* Rolagem contínua: as fotos aparecem duas vezes (ver js/script.js) e a faixa anda
+   exatamente o tamanho de uma volta, então o fim emenda no começo. */
+.lifestyle-track__inner {
+  display: grid;
+  grid-auto-columns: var(--photo-width);
+  grid-auto-flow: column;
+  gap: var(--photo-gap);
+  width: max-content;
+  animation: lifestyle-marquee var(--duration) linear infinite;
+}
+
+.lifestyle-track.is-paused .lifestyle-track__inner {
+  animation-play-state: paused !important;
+}
+
+@keyframes lifestyle-marquee {
+  to {
+    transform: translateX(calc(-50% - var(--photo-gap) / 2));
+  }
+}
+
+/* A rolagem faz parte do layout, então continua mesmo com movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+  .lifestyle-track__inner {
+    animation: lifestyle-marquee var(--duration) linear infinite !important;
+  }
+}
+
+.lifestyle-track figure {
+  margin: 0;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  border: 1px solid rgba(241, 120, 108, 0.22);
+  border-radius: 12px;
+  background: #2b1f28;
+}
+
+.lifestyle-track img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  .lifestyle-section {
+    padding: 110px 0;
+  }
+
+  .lifestyle-track {
+    --photo-width: 180px;
+    --photo-gap: 12px;
+    --duration: 70s;
+  }
+}
